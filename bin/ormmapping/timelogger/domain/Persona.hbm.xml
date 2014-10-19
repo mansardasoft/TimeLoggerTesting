@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: DuKe TeAm
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="timelogger.domain.Persona" table="Persona" lazy="false" discriminator-value="Persona">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<discriminator column="Discriminator" type="string"/>
+		<property name="nome" column="Nome" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="cognome" column="Cognome" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="codiceFiscale" column="CodiceFiscale" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="indirizzo" column="Indirizzo" type="string" length="255" not-null="false" lazy="false"/>
+		<subclass name="timelogger.domain.Utente" discriminator-value="Utente" lazy="false">
+			<property name="username" column="Username" unique="true" type="string" length="255" not-null="false" lazy="false"/>
+			<property name="password" column="Password" type="string" length="255" not-null="false" lazy="false"/>
+			<property name="dataAssunzione" column="DataAssunzione" type="date" not-null="false" lazy="false"/>
+			<property name="dataLicenziamento" column="DataLicenziamento" type="date" not-null="false" lazy="false"/>
+			<subclass name="timelogger.domain.Admin" discriminator-value="Admin" lazy="false">
+				<set name="ORM_Projects" lazy="true" cascade="save-update,lock" inverse="true">
+					<key column="AdminID" not-null="true"/>
+					<one-to-many class="timelogger.domain.Progetto"/>
+				</set>
+			</subclass>
+			<subclass name="timelogger.domain.Manager" discriminator-value="Manager" lazy="false">
+				<set name="ORM_Subprojects" lazy="true" cascade="save-update,lock" inverse="true">
+					<key column="ManagerID" not-null="false"/>
+					<one-to-many class="timelogger.domain.SottoProgetto"/>
+				</set>
+			</subclass>
+			<subclass name="timelogger.domain.Consulente" discriminator-value="Consulente" lazy="false">
+				<property name="pagaFissa" column="PagaFissa" type="integer" length="11" not-null="false" lazy="false"/>
+				<list name="ORM_Tasks" lazy="true" cascade="save-update,lock" inverse="false">
+					<key column="ConsulenteID" not-null="false"/>
+					<index column="PersonaIndex" type="integer"/>
+					<one-to-many class="timelogger.domain.Task"/>
+				</list>
+				<list name="ORM_Timerecords" lazy="true" cascade="save-update,lock" inverse="false">
+					<key column="ConsulenteID" not-null="true"/>
+					<index column="PersonaIndex" type="integer"/>
+					<one-to-many class="timelogger.domain.TimeRecord"/>
+				</list>
+			</subclass>
+		</subclass>
+		<subclass name="timelogger.domain.Cliente" discriminator-value="Cliente" lazy="false">
+			<set name="ORM_Projects" lazy="true" cascade="save-update,lock" inverse="true">
+				<key column="ClientD2" not-null="true"/>
+				<one-to-many class="timelogger.domain.Progetto"/>
+			</set>
+		</subclass>
+	</class>
+</hibernate-mapping>

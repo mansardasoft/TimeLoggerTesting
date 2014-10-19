@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: DuKe TeAm
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="timelogger.domain.Fattura" table="Fattura" lazy="false" discriminator-value="Fattura">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<discriminator column="Discriminator" type="string"/>
+		<many-to-one name="progetto" cascade="lock" column="ProgettoID" class="timelogger.domain.Progetto" not-null="true" update="false" insert="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		<property name="totale" column="Totale" type="integer" length="11" not-null="false" lazy="false"/>
+		<subclass name="timelogger.domain.FatturaFinale" discriminator-value="FatturaFinale" lazy="false">
+		</subclass>
+		<subclass name="timelogger.domain.FatturaParziale" discriminator-value="FatturaParziale" lazy="false">
+			<property name="dataInizio" column="DataInizio" type="date" not-null="false" lazy="false"/>
+			<property name="dataFine" column="DataFine" type="date" not-null="false" lazy="false"/>
+		</subclass>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: DuKe TeAm
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="timelogger.domain.SottoProgetto" table="SottoProgetto" lazy="false">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="manager" cascade="lock" column="ManagerID" class="timelogger.domain.Manager" not-null="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		<many-to-one name="progetto" cascade="lock" column="ProgettoID" class="timelogger.domain.Progetto" not-null="true" update="false" insert="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		<property name="titolo" column="Titolo" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="durataStimata" column="DurataStimata" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="totaleOre" column="TotaleOre" type="integer" length="11" not-null="true" lazy="false"/>
+		<property name="budgetStimato" column="BudgetStimato" type="integer" length="11" not-null="false" lazy="false"/>
+		<property name="pagaOraria" column="PagaOraria" type="integer" length="11" not-null="false" lazy="false"/>
+		<list name="ORM_Tasks" lazy="true" cascade="save-update,lock" inverse="false">
+			<key column="SottoProgettoID" not-null="true"/>
+			<index column="SottoProgettoIndex" type="integer"/>
+			<one-to-many class="timelogger.domain.Task"/>
+		</list>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: DuKe TeAm
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="timelogger.domain.TimeRecord" table="TimeRecord" lazy="false">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="consulente" cascade="lock" column="ConsulenteID" class="timelogger.domain.Consulente" not-null="true" update="false" insert="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		<many-to-one name="activity" cascade="lock" column="TaskID" class="timelogger.domain.Task" not-null="true" update="false" insert="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		<property name="inizio" column="Inizio" type="timestamp" not-null="false" lazy="false"/>
+		<property name="fine" column="Fine" type="timestamp" not-null="false" lazy="false"/>
+		<property name="commento" column="Commento" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="fatturato" column="Fatturato" type="boolean" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

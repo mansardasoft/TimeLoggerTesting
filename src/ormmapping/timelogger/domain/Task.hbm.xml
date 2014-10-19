@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: DuKe TeAm
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="timelogger.domain.Task" table="Task" lazy="false">
+		<id name="ID" column="ID" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="consulenteAssociato" cascade="lock" column="ConsulenteID" class="timelogger.domain.Consulente" not-null="false" update="false" insert="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		<many-to-one name="sottoprogetto" cascade="lock" column="SottoProgettoID" class="timelogger.domain.SottoProgetto" not-null="true" update="false" insert="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		<property name="titolo" column="Titolo" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="descrizione" column="Descrizione" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="completato" column="Completato" type="boolean" length="1" not-null="true" lazy="false"/>
+		<property name="fatturato" column="Fatturato" type="boolean" length="1" not-null="true" lazy="false"/>
+		<list name="ORM_Timerecords" lazy="true" cascade="save-update,lock" inverse="false">
+			<key column="TaskID" not-null="true"/>
+			<index column="TaskIndex" type="integer"/>
+			<one-to-many class="timelogger.domain.TimeRecord"/>
+		</list>
+	</class>
+</hibernate-mapping>
