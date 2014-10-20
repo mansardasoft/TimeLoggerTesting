@@ -26,5 +26,4 @@ public class OperationCreateNewProject implements OperationFlyweight{
 		
 		UIFacade.getInstance().toGuiAction(Constants.getInstance().createProjectCommand, invoker);
 	}
-
 }

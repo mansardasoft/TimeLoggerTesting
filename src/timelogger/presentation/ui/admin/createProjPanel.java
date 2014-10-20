@@ -1,5 +1,6 @@
 package timelogger.presentation.ui.admin;
 
+import javafx.scene.control.TextField;
 import org.jdesktop.swingx.JXDatePicker;
 
 import java.awt.BorderLayout;
@@ -47,7 +48,7 @@ import javax.swing.JFormattedTextField;
 
 @SuppressWarnings("serial")
 public class createProjPanel extends JPanel{
-	
+
 	private JTextField textFieldNameProj,textFieldSubPTitle;
 	private JFormattedTextField textFieldBudget, subProjLength;
 	private JXDatePicker startDateProj, invoiceDateInvoice;
@@ -483,7 +484,7 @@ public class createProjPanel extends JPanel{
 	
 	public void addProj()
 	{
-		UIFacade.getInstance().setAData("TitoloProgetto", this.textFieldNameProj.getText());
+        UIFacade.getInstance().setAData("TitoloProgetto", this.textFieldNameProj.getText());
 		UIFacade.getInstance().setAData("DataProgetto", this.startDateProj.getDate());
 		UIFacade.getInstance().setAData("ClienteProgetto", this.cbxListClients.getSelectedItem());
 		UIFacade.getInstance().toSysAction(Constants.getInstance().operationSetProjData,this );
@@ -507,9 +508,8 @@ public class createProjPanel extends JPanel{
 		}
 		return s;
 	}
-	
-	
-	public void addInvoice()
+
+    public void addInvoice()
 	{
 		UIFacade.getInstance().setAData("invoicesList", this.vBoxInvoices);
 		UIFacade.getInstance().setAData("invoicesPanel", this.invoicesPanel);
@@ -566,7 +566,21 @@ public class createProjPanel extends JPanel{
 		return listManagers;
 	}
 
-	@SuppressWarnings("rawtypes")
+    public JTextField getTextFieldNameProj() { return textFieldNameProj; }
+
+    public void setTextFieldNameProj(JTextField textFieldNameProj) { this.textFieldNameProj = textFieldNameProj; }
+
+    public JXDatePicker getStartDateProj() { return startDateProj; }
+
+    public void setStartDateProj(JXDatePicker startDateProj) { this.startDateProj = startDateProj; }
+
+    public JComboBox getCbxListClients() { return cbxListClients; }
+
+    public Box getvBoxInvoices() { return vBoxInvoices; }
+
+    public void setvBoxInvoices(Box vBoxInvoices) { this.vBoxInvoices = vBoxInvoices; }
+
+    @SuppressWarnings("rawtypes")
 	public void setListManagers(JComboBox listManagers) {
 		this.listManagers = listManagers;
 	}

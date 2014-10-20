@@ -19,18 +19,19 @@ public class OperationSetProjData implements OperationFlyweight{
 		System.out.println("OP::OperationSetProjData---> setting data in project");
 
 		Progetto p= (Progetto) ControlFacade.getInstance().getData("newProject");
-		
-		p.setTitolo((String)UIFacade.getInstance().getAData("TitoloProgetto"));
+
+        p.setTitolo((String)UIFacade.getInstance().getAData("TitoloProgetto"));
 		
 		DateConverter dc=new DateConverter();
-		Date d=(Date) UIFacade.getInstance().getAData("DataProgetto");
+
+        Date d=(Date) UIFacade.getInstance().getAData("DataProgetto");
 		p.setDataInizio(d);
 		
 		p.setClienteAssociato((Cliente) UIFacade.getInstance().getAData("ClienteProgetto"));
 	
 		UIFacade.getInstance().setAData("Progetto", p);
-		
-		UIFacade.getInstance().toGuiAction(Constants.getInstance().confirmProjectPopupCommand, invoker);
+
+        UIFacade.getInstance().toGuiAction(Constants.getInstance().confirmProjectPopupCommand, invoker);
 	}
 
 }

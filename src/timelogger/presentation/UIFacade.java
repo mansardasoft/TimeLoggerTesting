@@ -23,7 +23,8 @@ public class UIFacade {
 		this.data.clear();
 	}
 	
-	public void setAData(String key,Object value) {
+	public void setAData(String key, Object value) {
+        //TODO value null is not allowed
 		this.data.put(key, value);
 	}
 	

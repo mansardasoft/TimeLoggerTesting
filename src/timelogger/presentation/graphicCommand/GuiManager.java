@@ -13,7 +13,7 @@ public class GuiManager {
 	
 	private confirmDialog dialog=new confirmDialog();
 	
-	private ConcurrentHashMap<String,GraphicCommand> commands=new ConcurrentHashMap<String,GraphicCommand>();
+	private ConcurrentHashMap<String,GraphicCommand> commands = new ConcurrentHashMap<String,GraphicCommand>();
 	
 	private GuiManager()
 	{
@@ -26,7 +26,7 @@ public class GuiManager {
 	
 	public GraphicCommand getCommand(String commandKey)
 	{
-		return this.commands.get(commandKey);
+        return this.commands.get(commandKey);
 	}
 
 	public static GuiManager getInstance() {
