@@ -81,6 +81,7 @@ public class FatturaParziale extends timelogger.domain.Fattura {
 	
 	@Override
 	public int compareTo(Object arg0) {
+        //TODO fault if dataFine is null
 		FatturaParziale fp=(FatturaParziale)arg0;
 		return this.dataFine.compareTo(fp.getDataFine());
 	}
