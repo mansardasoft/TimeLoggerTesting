@@ -1,11 +1,6 @@
 package timelogger.control.operation.changetaskconsulenttests;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
-import timelogger.control.operation.changetaskconsulenttests.OperationChangeTaskConsulentBaseTest;
-
-import static org.junit.Assert.*;
 
 public class NoConsulentSelectedTest extends OperationChangeTaskConsulentBaseTest {
 

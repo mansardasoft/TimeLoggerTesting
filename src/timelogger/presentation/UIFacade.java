@@ -11,12 +11,9 @@ public class UIFacade {
 	
 	private static UIFacade instance=new UIFacade();
 
-	protected ConcurrentHashMap<String,Object> data=new ConcurrentHashMap<String,Object>();
+    protected ConcurrentHashMap<String,Object> data=new ConcurrentHashMap<String,Object>();
 
-	private UIFacade()
-	{
-		
-	}
+	private UIFacade(){}
 
 	public void clearData()
 	{
@@ -25,7 +22,11 @@ public class UIFacade {
 	
 	public void setAData(String key, Object value) {
         //TODO value null is not allowed
-		this.data.put(key, value);
+        if(value == null){
+            throw new NullPointerException("the value it must be not null");
+        }else {
+            this.data.put(key, value);
+        }
 	}
 	
 	public Object getAData(String key) {
@@ -39,6 +40,9 @@ public class UIFacade {
 	public void toGuiAction(String graphicCommandKey,Container father) {
 		GuiManager.getInstance().getCommand(graphicCommandKey).draw(father);
 	}
+
+    //Getters
+    public ConcurrentHashMap<String, Object> getData() {return data;}
 
 	/**
 	 * Metodo successivo allo startup

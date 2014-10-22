@@ -9,13 +9,12 @@ public class ControlFacade {
 
 	private static ControlFacade instance=new ControlFacade();
 	
-	private ControlFacade()
-	{}
+	private ControlFacade(){}
 	
 	private OperationFlyweightFactory oFactory=new OperationFlyweightFactory();
 	private org.orm.PersistentTransaction transaction;
 
-	private ConcurrentHashMap<String,Object> tempData=new ConcurrentHashMap<String,Object>();
+	private ConcurrentHashMap<String,Object> tempData = new ConcurrentHashMap<String,Object>();
 	
 	public OperationFlyweightFactory getOFactory() {
 		return this.oFactory;
@@ -56,7 +55,12 @@ public class ControlFacade {
 	
 	public void setData(String key,Object value)
 	{
-		this.tempData.put(key,value);
+        if(value == null){
+            throw new NullPointerException("Object value must be not null");
+        }else{
+		    this.tempData.put(key,value);
+        }
+
 	}
 
 	public static ControlFacade getInstance() {
@@ -67,8 +71,8 @@ public class ControlFacade {
 		ControlFacade.instance = instance;
 	}
 	
-	public void clearData(){
-		this.tempData.clear();
-	}
+	public void clearData(){this.tempData.clear();}
+
+
 
 }

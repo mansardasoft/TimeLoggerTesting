@@ -49,12 +49,16 @@ import javax.swing.JFormattedTextField;
 @SuppressWarnings("serial")
 public class createProjPanel extends JPanel{
 
-	private JTextField textFieldNameProj,textFieldSubPTitle;
+	private JTextField textFieldNameProj;
+
+    private JTextField textFieldSubPTitle;
 	private JFormattedTextField textFieldBudget, subProjLength;
 	private JXDatePicker startDateProj, invoiceDateInvoice;
 	
 	private JPanel invoicesPanel, dataProjPanel, dataSubProjPanel, subProjPanel, projPanel, panelCenter;
-	private Box vBoxInvoices,vBoxSubProjs;
+	private Box vBoxInvoices;
+
+    private Box vBoxSubProjs;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cbxListClients,listManagers;
 	private JButton btnNext,btnBack,btnAddSubProj, btnNewInvoice;
@@ -519,12 +523,9 @@ public class createProjPanel extends JPanel{
     
 	}
 	
-	public void responseToCalendar()
-	{
-	   
-	}
-	
-	public void addSubProj()
+	public void responseToCalendar(){}
+
+    public void addSubProj()
 	{
 		UIFacade.getInstance().setAData("subProjsList", this.vBoxSubProjs);
 		UIFacade.getInstance().setAData("subProjsPanel", this.subProjPanel);
@@ -551,44 +552,45 @@ public class createProjPanel extends JPanel{
 			}
 	}
 
+
+    //Getter and Setter
 	@SuppressWarnings("rawtypes")
 	public JComboBox getListClients() {
 		return cbxListClients;
 	}
-
-	@SuppressWarnings("rawtypes")
-	public void setListClients(JComboBox listClients) {
-		this.cbxListClients = listClients;
-	}
-	
 	@SuppressWarnings("rawtypes")
 	public JComboBox getListManagers() {
 		return listManagers;
 	}
-
     public JTextField getTextFieldNameProj() { return textFieldNameProj; }
-
-    public void setTextFieldNameProj(JTextField textFieldNameProj) { this.textFieldNameProj = textFieldNameProj; }
-
     public JXDatePicker getStartDateProj() { return startDateProj; }
-
-    public void setStartDateProj(JXDatePicker startDateProj) { this.startDateProj = startDateProj; }
-
     public JComboBox getCbxListClients() { return cbxListClients; }
-
     public Box getvBoxInvoices() { return vBoxInvoices; }
+    public Box getvBoxSubProjs() { return vBoxSubProjs; }
+    public JPanel getSubProjPanel() { return subProjPanel; }
+    public JFormattedTextField getTextFieldBudget() { return textFieldBudget; }
+    public JFormattedTextField getSubProjLength() { return subProjLength; }
+    public JTextField getTextFieldSubPTitle() { return textFieldSubPTitle; }
 
+    public void setTextFieldSubPTitle(JTextField textFieldSubPTitle) { this.textFieldSubPTitle = textFieldSubPTitle; }
+    @SuppressWarnings("rawtypes")
+    public void setListClients(JComboBox listClients) {
+        this.cbxListClients = listClients;
+    }
+    public void setTextFieldNameProj(JTextField textFieldNameProj) { this.textFieldNameProj = textFieldNameProj; }
+    public void setStartDateProj(JXDatePicker startDateProj) { this.startDateProj = startDateProj; }
+    public void setSubProjPanel(JPanel subProjPanel) { this.subProjPanel = subProjPanel; }
+    public void setvBoxSubProjs(Box vBoxSubProjs) { this.vBoxSubProjs = vBoxSubProjs; }
     public void setvBoxInvoices(Box vBoxInvoices) { this.vBoxInvoices = vBoxInvoices; }
-
+    public void setSubProjLength(JFormattedTextField subProjLength) { this.subProjLength = subProjLength; }
+    public void setTextFieldBudget(JFormattedTextField textFieldBudget) { this.textFieldBudget = textFieldBudget; }
     @SuppressWarnings("rawtypes")
 	public void setListManagers(JComboBox listManagers) {
 		this.listManagers = listManagers;
 	}
-	
-	private void nextEnabler(){
-		btnNext.setEnabled(this.cbxClientCheck && this.cbxProjDateCheck && this.textFieldNameProjCheck && true);
-	}
-	
+
+
+    private void nextEnabler(){ btnNext.setEnabled(this.cbxClientCheck && this.cbxProjDateCheck && this.textFieldNameProjCheck && true); }
 	private void nextSubProjEnabler(){
 		this.btnAddSubProj.setEnabled(this.titleSubProjCheck && this.cbxManagerCheck);
 	}

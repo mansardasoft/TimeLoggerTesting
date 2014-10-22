@@ -19,6 +19,10 @@ import timelogger.domain.Progetto;
 
 public class OperationCreateNewInvoice implements OperationFlyweight {
 
+    public FatturaParziale getFp() {
+        return fp;
+    }
+
     private FatturaParziale fp;
     private DateConverter dc = new DateConverter();
 

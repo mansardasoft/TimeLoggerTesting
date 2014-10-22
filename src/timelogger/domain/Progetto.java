@@ -297,4 +297,49 @@ public class Progetto {
 		return report;
 	}
 
+    public void toConsole() {
+        String aux;
+        int support=55;
+        System.out.println("Titolo Progetto: "+this.titolo);
+        if(this.dataInizio!=null) System.out.println("Data Inizio: "+this.dataInizio.toString());
+        else System.out.println("Data Inizio: Non inserita;");
+        if(this.dataFine!=null) System.out.println("Data Fine: "+this.dataFine.toString());
+        else System.out.println("Data Fine: Non inserita;");
+        System.out.println("Sottoprogetti: ");
+        for(int i=0;i<this.sottoprogetti.size();i++)
+        {
+            aux = this.sottoprogetti.get(i).getTitolo()+" associato al manager "+this.sottoprogetti.get(i).getManager().getCognome()+". Durata: "+
+                    this.sottoprogetti.get(i).getDurataStimata()+" Budget: "+this.sottoprogetti.get(i).getBudgetStimato();
+            if(aux.length()>=support) aux=aux.substring(0, support-1)+"<br>"+aux.substring(support, aux.length()-1);
+            System.out.println(aux);
+        }
+        System.out.println("Fatture:");
+        for(int i=0;i<this.fatture.size();i++)
+        {
+            System.out.println(this.fatture.get(i).toString());
+        }
+    }
+
+    public String serialize(){
+        String serialized = new String();
+        serialized +="Progetto: "+this.titolo+"\n";
+        if(this.dataInizio!=null) {
+            serialized += "Data Inizio: " + this.dataInizio.toString() + "\n";
+        }else{
+            serialized +="Data Inzio: non inserita \n";
+        }
+        if(this.dataFine != null ){
+            serialized +="Data Fine: "+this.dataFine.toString()+"\n";
+        }else{
+            serialized +="Data Fine: non inserita \n";
+        }
+        if(this.clienteAssociato != null){
+            serialized +="Cliente: "+this.clienteAssociato.toString()+"\n";
+        }else{
+            serialized +="Cliente: non inserito \n";
+        }
+
+        return serialized;
+    }
+
 }

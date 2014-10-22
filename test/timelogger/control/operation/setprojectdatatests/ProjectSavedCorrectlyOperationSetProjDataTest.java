@@ -1,10 +1,10 @@
 package timelogger.control.operation.setprojectdatatests;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import timelogger.control.ControlFacade;
-import timelogger.control.operation.OperationBaseTest;
 import timelogger.control.operation.OperationSetProjData;
 import timelogger.domain.Admin;
 import timelogger.domain.Cliente;
@@ -16,7 +16,7 @@ import timelogger.presentation.ui.admin.createProjPanel;
 import java.util.Calendar;
 import java.util.Date;
 
-public class OperationSetProjDataTest extends OperationBaseTest {
+public class ProjectSavedCorrectlyOperationSetProjDataTest{
 
     private createProjPanel fakeUi = new createProjPanel();
 
@@ -25,7 +25,7 @@ public class OperationSetProjDataTest extends OperationBaseTest {
      */
     protected OperationSetProjData testingObj = new OperationSetProjData();
 
-    protected Progetto fakeProgetto;
+    protected Progetto fakeProgetto, fakeProgettoOracle;
     protected Admin fakeAdmin;
     protected Cliente fakeCliente;
     protected Date fakeStartDate, fakeEndDate;
@@ -61,12 +61,12 @@ public class OperationSetProjDataTest extends OperationBaseTest {
     protected Cliente initFakeCliente() {
         Cliente cliente = new Cliente();
         cliente.setCognome("De Gregori");
-        cliente.setNome("Francesco");
+        cliente.setNome("Francesco "+ String.valueOf(Math.random()));
         return cliente;
     }
 
-    @Override
-    public void initUseCase(){
+    @Before
+    public void setUp(){
 
         GuiBuilder.getInstance().createAdminCommands();
 
@@ -78,32 +78,23 @@ public class OperationSetProjDataTest extends OperationBaseTest {
         UIFacade.getInstance().setAData("TitoloProgetto", this.fakeProgetto.getTitolo());
         UIFacade.getInstance().setAData("DataProgetto", this.fakeProgetto.getDataInizio());
         UIFacade.getInstance().setAData("ClienteProgetto", this.fakeCliente);
+        this.fakeCliente = this.initFakeCliente();
+        this.fakeProgetto.setTitolo("Progetto 2");
+        this.fakeProgetto.setClienteAssociato(this.fakeCliente);
+
+        this.fakeProgettoOracle = new Progetto();
+        this.fakeProgettoOracle.setTitolo("Progetto 2");
+        this.fakeProgettoOracle.setDataInizio(new Date());
     }
-
-    @After
-    public void tearDown() throws Exception {
-        this.echo("----- Test Report -----");
-
-        if (caughtException != null) {
-            this.echo("Exception caught in execution ");
-            throw caughtException;
-        } else {
-            this.echo("Nuovo Progetto Creato " + this.fakeProgetto.toString());
-            this.echo("Admin: " + this.fakeAdmin.toString());
-            this.echo("Cliente: " + this.fakeCliente.toString());
-        }
-    }
-
-
 
     @Test
-    public void testDoOp() throws Exception {
-        try {
-            testingObj.doOp(ControlFacade.getInstance(), this.fakeUi);
-        } catch (Exception e) {
-            this.echo("Errors executing doOp");
-            this.caughtException = e;
-        }
+    public void testDoOpProjectSavedCorrectly() throws Exception {
+        testingObj.doOp(ControlFacade.getInstance(), this.fakeUi);
 
+        //Oracle
+        Assert.assertEquals(
+                this.fakeProgetto.serialize(),
+                ((Progetto)UIFacade.getInstance().getAData("Progetto")).serialize()
+        );
     }
 }
