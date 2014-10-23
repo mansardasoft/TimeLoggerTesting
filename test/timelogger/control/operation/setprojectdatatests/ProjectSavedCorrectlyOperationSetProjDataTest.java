@@ -78,6 +78,7 @@ public class ProjectSavedCorrectlyOperationSetProjDataTest{
         UIFacade.getInstance().setAData("TitoloProgetto", this.fakeProgetto.getTitolo());
         UIFacade.getInstance().setAData("DataProgetto", this.fakeProgetto.getDataInizio());
         UIFacade.getInstance().setAData("ClienteProgetto", this.fakeCliente);
+
         this.fakeCliente = this.initFakeCliente();
         this.fakeProgetto.setTitolo("Progetto 2");
         this.fakeProgetto.setClienteAssociato(this.fakeCliente);

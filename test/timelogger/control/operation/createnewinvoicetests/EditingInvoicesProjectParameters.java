@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * Created by daniele on 22/10/14.
  */
-public class EditiingInvoicesProjectParameters {
+public class EditingInvoicesProjectParameters {
 
     @Before
     public void setUp() {

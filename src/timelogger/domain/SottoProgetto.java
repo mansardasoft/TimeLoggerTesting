@@ -301,4 +301,12 @@ public class SottoProgetto implements Comparable{
 		}
 		return s;
 	}
+
+    public String serialize(){
+        String string = "Titolo SottoProgetto: "+this.titolo + "\n";
+        string += "Manager Selezionato: "+this.manager.toString() + "\n";
+        string += "Durata: "+this.durataStimata + "\n";
+        string += "Progetto: "+this.progetto.serialize() + "\n";
+        return string;
+    }
 }

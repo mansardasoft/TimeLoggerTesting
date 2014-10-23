@@ -1,5 +1,6 @@
 package timelogger.control.operation.setprojectdatatests;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import timelogger.control.ControlFacade;
@@ -44,6 +45,11 @@ public class EditingProjectParameters {
                 testingString,
                 ((Progetto) ControlFacade.getInstance().getData("newProject")).getTitolo()
         );
+    }
+
+    @After
+    public void tearDown(){
+        ((Progetto)ControlFacade.getInstance().getData("newProject")).setTitolo("Progetto 1");
     }
 
 

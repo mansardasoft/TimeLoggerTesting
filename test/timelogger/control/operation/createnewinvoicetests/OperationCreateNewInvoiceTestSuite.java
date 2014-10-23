@@ -9,7 +9,7 @@ import timelogger.control.operation.setprojectdatatests.OperationSetProjDataTest
         OperationSetProjDataTestSuite.class,
         InvoicesProjectSavedCorretlyTest.class,
         InvoicesProjectListContains11Item.class,
-        EditiingInvoicesProjectParameters.class
+        EditingInvoicesProjectParameters.class
 })
 public class OperationCreateNewInvoiceTestSuite {
     //It must be empty

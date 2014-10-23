@@ -44,8 +44,13 @@ public class OperationCreateNewSubProj implements OperationFlyweight{
 	private void setSpData()
 	{
 		this.sp.setTitolo((String)ControlFacade.getInstance().getData("TitoloSottoProgetto"));
+        /*TODO-fault should be changed the following assignment
 		this.sp.setBudgetStimato((Integer) (ControlFacade.getInstance().getData("DurataSottoProgetto")));
-		this.sp.setDurataStimata((Integer) ControlFacade.getInstance().getData("BudgetSottoProgetto"));
+		this.sp.setDurataStimata((Integer) ControlFacade.getInstance().getData("BudgetSottoProgetto"));*/
+
+        this.sp.setBudgetStimato((Integer) (ControlFacade.getInstance().getData("BudgetSottoProgetto")));
+		this.sp.setDurataStimata((Integer) ControlFacade.getInstance().getData("DurataSottoProgetto"));
+
 		this.sp.setManager((Manager) ControlFacade.getInstance().getData("ManagerSelezionato"));
 	}
 	
