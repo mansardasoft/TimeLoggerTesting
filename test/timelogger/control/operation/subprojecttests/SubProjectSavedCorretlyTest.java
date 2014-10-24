@@ -1,4 +1,4 @@
-package timelogger.control.operation.createnewsubprojecttests;
+package timelogger.control.operation.subprojecttests;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -10,16 +10,13 @@ import timelogger.domain.Manager;
 import timelogger.domain.Progetto;
 import timelogger.domain.SottoProgetto;
 
-import javax.naming.ldap.Control;
 import java.awt.*;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static org.hamcrest.collection.IsMapContaining.hasKey;
 
 /**
  * Created by daniele on 23/10/14.
  */
-public class SubProjectParametersSavedCorrectly {
+public class SubProjectSavedCorretlyTest {
 
     private OperationCreateNewSubProj testingObj = new OperationCreateNewSubProj();
     private Container fakeUi = new Container();
@@ -27,7 +24,7 @@ public class SubProjectParametersSavedCorrectly {
     private SottoProgetto fakeSottoProgetto = new SottoProgetto();
 
     private void initFakeManager() {
-        this.fakeManager.setCognome("Rossi");
+        this.fakeManager.setCognome("Marrone");
         this.fakeManager.setNome("Valerio");
 
         ControlFacade.getInstance().setData("ManagerSelezionato", this.fakeManager);
@@ -38,9 +35,6 @@ public class SubProjectParametersSavedCorrectly {
         this.fakeSottoProgetto.setManager(this.fakeManager);
         this.fakeSottoProgetto.setBudgetStimato(1000);
         this.fakeSottoProgetto.setDurataStimata(100);
-        this.fakeSottoProgetto.setProgetto(
-                (Progetto) ControlFacade.getInstance().getData("newProject")
-        );
     }
 
     @Before
@@ -57,15 +51,17 @@ public class SubProjectParametersSavedCorrectly {
     }
 
     @Test
-    public void testDoOpParametersAreEqualsToFakeSubProject(){
+    public void testDoOpSubProjectListContainsSingleItem() {
+        testingObj.doOp(ControlFacade.getInstance(), fakeUi);
+
         Assert.assertEquals(
-                this.fakeSottoProgetto.serialize(),
-                ((Progetto) ControlFacade.getInstance().getData("newProject")).sottoprogetti.get(0).serialize()
-        );
+                1,
+                ((Progetto) ControlFacade.getInstance().getData("newProject")).sottoprogetti.size());
+    }
 
-        Assert.assertThat(ControlFacade.getInstance().getTempData(),
-                hasKey("newProject"));
-
-        System.out.println(((Progetto) ControlFacade.getInstance().getData("newProject")).serialize());
+    @After
+    public void tearDown(){
+        ((Progetto) ControlFacade.getInstance().getData("newProject")).sottoprogetti.clear();
+        ((Progetto) ControlFacade.getInstance().getData("newProject")).sottoprogetti.add(this.fakeSottoProgetto);
     }
 }

@@ -87,6 +87,11 @@ public class Manager extends timelogger.domain.Utente {
 	{
 		GuiBuilder.getInstance().createManagerCommands();
 	}
-	
-	
+
+
+    public String serialize() {
+        String string = "Nome: "+this.nome+"\n";
+        string += "Cognome: "+this.cognome;
+        return string;
+    }
 }

@@ -1,4 +1,4 @@
-package timelogger.control.operation.createnewsubprojecttests;
+package timelogger.control.operation.subprojecttests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -8,8 +8,10 @@ import timelogger.control.operation.setprojectdatatests.OperationSetProjDataTest
 @Suite.SuiteClasses({
         OperationSetProjDataTestSuite.class,
         SubProjectSavedCorretlyTest.class,
-        SubProjectParametersSavedCorrectly.class
+        SubProjectParametersSavedCorrectly.class,
+        OperationRemoveSubProjTest.class,
+        ChangeManagerOfSubProject.class
 })
-public class OperationCreateNewSubProjTestSuite {
+public class OperationOnSubProjTestSuite {
     //must be empty
 }
